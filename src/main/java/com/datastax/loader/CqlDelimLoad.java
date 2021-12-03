@@ -657,6 +657,8 @@ public class CqlDelimLoad {
                                                          keyspace, table, ttl);
             Future<Long> res = executor.submit(worker);
             total = res.get();
+            if (total < 0)
+              return false;
             executor.shutdown();
         }
         else {
@@ -685,8 +687,12 @@ public class CqlDelimLoad {
                 results.add(executor.submit(worker));
             }
             executor.shutdown();
-            for (Future<Long> res : results)
-                total += res.get();
+            for (Future<Long> res : results) {
+              Long resLong = res.get();
+              if (resLong < 0)
+                return false;
+              total += resLong;
+            }
         }
 
         // Cleanup
