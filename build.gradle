@@ -21,8 +21,8 @@ task unloader(type: Exec) {
 }
 
 jar {
-    baseName = 'cassandra-loader'
-    version = versionNum
+    archiveBaseName = 'cassandra-loader'
+    archiveVersion = versionNum
 }
 
 repositories {
@@ -49,8 +49,8 @@ task uberloader(type: Jar) {
     manifest {
         attributes "Main-Class" : 'com.datastax.loader.CqlDelimLoad'
     }
-    baseName = 'cassandra-loader-uber'
-    version =  versionNum
+    archiveBaseName = 'cassandra-loader-uber'
+    archiveVersion =  versionNum
     duplicatesStrategy = 'include'
 
 }
@@ -65,7 +65,7 @@ task uberunloader(type: Jar) {
     manifest {
         attributes "Main-Class" : 'com.datastax.loader.CqlDelimUnload'
     }
-    baseName = 'cassandra-unloader-uber'
-    version =  versionNum
+    archiveBaseName = 'cassandra-unloader-uber'
+    archiveVersion =  versionNum
     duplicatesStrategy = 'include'
 }
